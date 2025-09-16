@@ -1,0 +1,160 @@
+/* ====== Palette & fonts ====== */
+:root{
+  --bg: #f9f6f1;        
+  --brown: #c9bab0;     
+  --brown-dark: #563a2b;
+  --card-bg: #ffffff;
+  --accent: #8b5e3c;
+  --text: #3a2d26;
+  --radius: 12px;
+  --font: "Poppins", system-ui, Arial, sans-serif;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font);
+  -webkit-font-smoothing:antialiased;
+}
+
+/* Header */
+.site-header{
+  background:var(--brown);
+  color:#fff;
+  padding:12px 16px;
+}
+.header-inner{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.logo{
+  font-size:26px;
+  width:44px;
+  height:44px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,0.06);
+  border-radius:10px;
+}
+.brand h1{
+  margin:0;
+  font-size:18px;
+  font-weight:600;
+  line-height:1;
+}
+.tagline{
+  margin:2px 0 0;
+  font-size:12px;
+  opacity:0.95;
+}
+
+/* Sections */
+.menu-section{
+  padding:14px;
+}
+.section-title{
+  margin:0 0 10px;
+  color:var(--brown-dark);
+  font-size:18px;
+  font-weight:600;
+}
+
+/* Grid: two cards per row */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:12px;
+}
+
+/* Card (horizontal layout inside) */
+.card{
+  background:var(--card-bg);
+  border-radius:var(--radius);
+  padding:10px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+}
+
+/* image */
+.card .thumb{
+  width:72px;
+  height:72px;
+  flex-shrink:0;
+  border-radius:10px;
+  object-fit:cover;
+  background:#eee;
+}
+
+/* middle content */
+.card .content{
+  flex:1;
+  min-width:0;
+}
+.card .title{
+  margin:0;
+  font-size:15px;
+  font-weight:600;
+}
+.card .desc{
+  margin:4px 0 0;
+  font-size:12px;
+  color:#6b6057;
+}
+.card .price{
+  margin-top:6px;
+  font-weight:700;
+  color:var(--text);
+  font-size:13px;
+}
+
+/* button area */
+.card .actions{
+  margin-left:8px;
+  display:flex;
+  align-items:center;
+}
+.btn-order{
+  display:inline-block;
+  background:var(--brown);
+  color:white;
+  padding:8px 12px;
+  border-radius:8px;
+  text-decoration:none;
+  font-size:13px;
+}
+.btn-order:hover{background:var(--accent)}
+
+/* ===== Responsive adjustments ===== */
+/* Vertical layout for small screens */
+@media (max-width: 500px) {
+  .grid {
+    grid-template-columns: 1fr; /* one card per row */
+    gap: 10px;
+  }
+  .card {
+    flex-direction: row; /* keep image + content + button horizontal */
+    padding: 8px;
+  }
+  .card .thumb{ width:60px; height:60px; }
+  .card .title{ font-size:14px; }
+  .btn-order{ padding:7px 10px; font-size:12px; border-radius:7px; }
+}
+
+/* Fully vertical for very small phones */
+@media (max-width: 380px) {
+  .card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .card .actions {
+    margin-left:0;
+    margin-top:8px;
+  }
+}
