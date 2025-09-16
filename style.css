@@ -1,7 +1,8 @@
 <<<<<<< HEAD
 /* ====== Palette & fonts ====== */
 :root{
-  --bg: #f9f6f1;        
+  --bg: #f9f6f1;  --continue
+       
   --brown: #c9bab0;     
   --brown-dark: #563a2b;
   --card-bg: #ffffff;
