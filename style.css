@@ -1,17 +1,15 @@
-<<<<<<< HEAD
+
 /* ====== Palette & fonts ====== */
-:root{
-  --bg: #f9f6f1;  --continue
-       
-  --brown: #c9bab0;     
-  --brown-dark: #563a2b;
+:root {
+  --bg: #f9f6f1;
+  --brown: #c9bab0;
+  --brown-dark: #f8ef04;
   --card-bg: #ffffff;
   --accent: #8b5e3c;
   --text: #3a2d26;
   --radius: 12px;
   --font: "Poppins", system-ui, Arial, sans-serif;
 }
-
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
@@ -160,7 +158,7 @@ body{
     margin-top:8px;
   }
 }
-=======
+
 /* ====== Palette & fonts ====== */
 :root{
   --bg: #f9f6f1;        
@@ -321,4 +319,5 @@ body{
     margin-top:8px;
   }
 }
->>>>>>> b030328 (Description de ta modification)
+
+
