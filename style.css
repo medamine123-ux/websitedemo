@@ -1,13 +1,13 @@
 
 /* ====== Palette & fonts ====== */
 :root {
-  --bg: #f9f6f1;
-  --brown: #c9bab0;
-  --brown-dark: #f8ef04;
+  --bg: #d2c6b1;
+  --brown: #f01c1c;
+  --brown-dark: #242315;
   --card-bg: #ffffff;
-  --accent: #8b5e3c;
-  --text: #3a2d26;
-  --radius: 12px;
+  --accent: #4d4c4b;
+  --text: #262424;
+  --radius: 14px;
   --font: "Poppins", system-ui, Arial, sans-serif;
 }
 *{box-sizing:border-box}
