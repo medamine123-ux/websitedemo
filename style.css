@@ -1,17 +1,19 @@
 /* ====== Root Variables & Themes ====== */
 :root {
-  /* Default theme: beige */
-  --bg: #8c7854;        
-  --brown: #d45500;     
-  --brown-dark: #eaaf25;
-  --card-bg: #d83434;
-  --accent: #8b5e3c;
-  --text: #26201c;
+  /* Base website colors (Amine Coffee style) */
+  --bg: #F3E3D3;            /* Base cream background */
+  --brown: #4B2E2E;         /* Dark coffee for header, buttons */
+  --brown-dark: #7B4F4F;    /* Medium coffee for titles, sections */
+  --card-bg: #EDE0D4;       /* Card backgrounds */
+  --accent: #D4AF37;        /* Gold accent for buttons, highlights */
+  --text: #1A1A1A;          /* Main text */
   --radius: 12px;
   --font: "Poppins", system-ui, Arial, sans-serif;
+
+  /* Optional secondary colors */
+  --accent-teal: #2A7F7F;       /* Secondary accent (teal) */
+  --highlight-yellow: #F4D35E;  /* CTA or highlights */
 }
-
-
 
 /* ===== Global Reset ===== */
 * { box-sizing: border-box; }
