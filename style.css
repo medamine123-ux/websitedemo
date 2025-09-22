@@ -1,7 +1,7 @@
 /* ====== Root Variables & Themes ====== */
 :root {
   /* Base website colors (Amine Coffee style) */
-  --bg: #F3E3D3;            /* Base cream background */
+  --bg: #f1e1d1;            /* Base cream background */
   --brown: #4B2E2E;         /* Dark coffee for header, buttons */
   --brown-dark: #7B4F4F;    /* Medium coffee for titles, sections */
   --card-bg: #EDE0D4;       /* Card backgrounds */
