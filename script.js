@@ -1,134 +1,250 @@
-/* ===== Simple data-driven menu =====
-   Edit the menuData array to add/remove items.
-   Each item: id, section ('drinks' or 'milk'), name, price, desc, img (url), waText
-*/
 const menuData = [
-  // Coffee Drinks
   {
     id: 'espresso',
-    section: 'drinks',
     name: 'Espresso',
-    price: '12 RMB',
-    desc: 'Strong and fresh',
-    img: 'https://source.unsplash.com/300x300/?espresso',
-    waText: 'Salam Amine, bghit Espresso wahd'
-  },
-  {
-    id: 'americano',
-    section: 'drinks',
-    name: 'Americano',
-    price: '14 RMB',
-    desc: 'Classic black coffee',
-    img: 'https://source.unsplash.com/300x300/?americano',
-    waText: 'Salam Amine, bghit Americano wahd'
-  },
-
-  // Coffee + Milk
-  {
-    id: 'latte',
-    section: 'milk',
-    name: 'Latte',
-    price: '15 RMB',
-    desc: 'Smooth coffee with milk foam',
-    img: 'https://source.unsplash.com/300x300/?latte',
-    waText: 'Salam Amine, bghit Latte wahd'
+    variants: [
+      { 
+        name: 'Robusta', 
+        price: '5 RMB', 
+        waText: 'I want Robusta',
+        img: './images/espresso1.png',
+        desc: 'A bold and intense espresso made from pure Robusta beans — strong flavor with high caffeine.'
+      },
+      { 
+        name: '75% Robusta / 25% Arabica', 
+        price: '6 RMB', 
+        waText: 'I want 75% Robusta / 25% Arabica',
+        img: './images/75-25.png',
+        desc: 'A balanced espresso blend — powerful Robusta mixed with smooth Arabica for rich aroma.'
+      },
+      { 
+        name: '100% Arabica', 
+        price: '8 RMB', 
+        waText: 'I want 100% Arabica',
+        img: './images/100.png',
+        desc: 'A smooth and slightly sweet espresso with gentle acidity, made entirely from Arabica beans.'
+      }
+    ]
   },
   {
     id: 'cappuccino',
-    section: 'milk',
     name: 'Cappuccino',
-    price: '15 RMB',
-    desc: 'Creamy with chocolate sprinkle',
-    img: 'https://source.unsplash.com/300x300/?cappuccino',
-    waText: 'Salam Amine, bghit Cappuccino wahd'
+    variants: [
+      { 
+        name: 'Cappuccino Classic', 
+        price: '6 RMB', 
+        waText: 'I want Cappuccino Classic',
+        img: './images/test4.png',
+        desc: 'A perfect mix of espresso, steamed milk, and milk foam — creamy and comforting.'
+      },
+      { 
+        name: 'Cappuccino Chocolate', 
+        price: '6 RMB', 
+        waText: 'I want Cappuccino Chocolate',
+        img: './images/capp2.png',
+        desc: 'Rich cappuccino with a touch of chocolate — smooth, sweet, and delicious.'
+      }
+    ]
+  },
+  {
+    id: 'latte',
+    name: 'Latte',
+    variants: [
+      { 
+        name: 'Latte', 
+        price: '6 RMB', 
+        waText: 'I want Latte',
+        img: './images/Latte rosetta.png',
+        desc: 'A gentle coffee with more milk for a smooth, creamy taste — light and easy to drink.'
+      },
+      { 
+        name: 'Vanilla Latte', 
+        price: '7 RMB', 
+        waText: 'I want Vanilla Latte',
+        img: './images/vanilla latte.png',
+        desc: 'A latte with a soft touch of vanilla — aromatic, cozy, and perfectly sweet.'
+      }
+    ]
+  },
+  {
+    id: 'milk-drinks',
+    name: 'Milk Specials',
+    variants: [
+      { 
+        name: 'Milk with Cacao', 
+        price: '6 RMB', 
+        waText: 'I want Milk with Cacao',
+        img: './images/milk cacao.png',
+        desc: 'Warm milk mixed with real cacao — smooth, sweet, and perfect for chocolate lovers.'
+      },
+      { 
+        name: 'Milk with Nescafé', 
+        price: '6 RMB', 
+        waText: 'I want Milk with Nescafé',
+        img: './images/nescafe.png',
+        desc: 'A comforting mix of milk and Nescafé coffee — gentle flavor and smooth texture.'
+      },
+      { 
+        name: 'Milk with Louisa Herb', 
+        price: '6 RMB', 
+        waText: 'I want Milk with Louisa Herb',
+        img: './images/louisa.png',
+        desc: 'Fresh milk with Louisa herb — lightly sweet and relaxing, great for calm moments.'
+      }
+    ]
   }
 ];
 
-/* ===== Helpers ===== */
-function createCard(item) {
-  const card = document.createElement('article');
-  card.className = 'card';
-  card.dataset.id = item.id;
-
-  // image
-  const img = document.createElement('img');
-  img.className = 'thumb';
-  img.src = item.img;
-  img.alt = item.name;
-
-  // content
-  const content = document.createElement('div');
-  content.className = 'content';
-  const title = document.createElement('h3');
-  title.className = 'title';
-  title.textContent = item.name;
-  const desc = document.createElement('div');
-  desc.className = 'desc';
-  desc.textContent = item.desc;
-  const price = document.createElement('div');
-  price.className = 'price';
-  price.textContent = item.price;
-
-  content.appendChild(title);
-  content.appendChild(desc);
-  content.appendChild(price);
-
-  // actions (WhatsApp button)
-  const actions = document.createElement('div');
-  actions.className = 'actions';
-  const btn = document.createElement('a');
-  btn.className = 'btn-order';
-
-  /* === IMPORTANT: Replace the phone number below with your WhatsApp number in international format.
-     Example: Morocco 212XXXXXXXX  or China 86XXXXXXXXXX
-  */
-  const phone = '212652450553'; // <-- replace this with your number
-  const waLink = `https://wa.me/${phone}?text=${encodeURIComponent(item.waText)}`;
-  btn.href = waLink;
-  btn.target = '_blank';
-  btn.rel = 'noopener';
-  btn.textContent = 'Order';
-
-  // Track click in localStorage (simple)
-  btn.addEventListener('click', () => {
-    incrementClickCount(item.id);
-  });
-
-  actions.appendChild(btn);
-
-  // assemble
-  card.appendChild(img);
-  card.appendChild(content);
-  card.appendChild(actions);
-
-  return card;
-}
-
-function incrementClickCount(id) {
-  const key = `click_${id}`;
-  const current = Number(localStorage.getItem(key) || 0);
-  localStorage.setItem(key, current + 1);
-  // optional: console log
-  console.log(`[track] ${id} clicked — total: ${current + 1}`);
-}
-
-/* ===== Render menu by section ===== */
+/* ===== Render Menu ===== */
 function renderMenu() {
-  const drinksGrid = document.getElementById('grid-coffee-drinks');
-  const milkGrid = document.getElementById('grid-coffee-milk');
-  drinksGrid.innerHTML = '';
-  milkGrid.innerHTML = '';
+  const menuSection = document.getElementById('menu-section');
+  const categoriesNav = document.getElementById('categories');
+  menuSection.innerHTML = '';
+  categoriesNav.innerHTML = '';
 
+  // ==== Left categories ====
   menuData.forEach(item => {
-    const card = createCard(item);
-    if (item.section === 'drinks') drinksGrid.appendChild(card);
-    else if (item.section === 'milk') milkGrid.appendChild(card);
+    const catLink = document.createElement('div');
+    catLink.className = 'category';
+    catLink.textContent = item.name;
+    catLink.dataset.id = item.id;
+    categoriesNav.appendChild(catLink);
+
+    catLink.addEventListener('click', () => {
+      document.querySelectorAll('.category').forEach(c => c.classList.remove('active'));
+      catLink.classList.add('active');
+
+      const section = document.getElementById(`${item.id}-0`);
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // ==== Right menu ====
+  menuData.forEach(item => {
+    const titleContainer = document.createElement('div');
+    titleContainer.className = 'section-title';
+    titleContainer.innerHTML = `
+      <span class="line"></span>
+      <h2>${item.name}</h2>
+      <span class="line"></span>
+    `;
+    menuSection.appendChild(titleContainer);
+
+    item.variants.forEach((variant, index) => {
+      const section = document.createElement('div');
+      section.className = 'menu-item-section';
+      section.id = `${item.id}-${index}`;
+
+      const card = document.createElement('div');
+      card.className = 'card';
+
+      const img = document.createElement('img');
+      img.src = variant.img;
+      img.alt = variant.name;
+      img.className = 'thumb';
+
+      const content = document.createElement('div');
+      content.className = 'content';
+
+      const title = document.createElement('h3');
+      title.textContent = variant.name;
+
+      const price = document.createElement('p');
+      price.textContent = variant.price;
+      price.style.fontWeight = 'bold';
+      price.style.color = '#b8860b';
+
+      const btn = document.createElement('button');
+      btn.className = 'btn-small';
+      btn.textContent = 'Order';
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openPopup(variant);
+      });
+
+      content.appendChild(title);
+      content.appendChild(price);
+      content.appendChild(btn);
+
+      card.appendChild(img);
+      card.appendChild(content);
+      section.appendChild(card);
+      menuSection.appendChild(section);
+
+      card.addEventListener('click', () => openPopup(variant));
+    });
   });
 }
 
-/* initial render */
 renderMenu();
 
-/* ===== Optional: expose functions for dev console ===== */
-window.menuData = menuData;
-window.renderMenu = renderMenu;
+/* ===== Popup Logic ===== */
+const popup = document.getElementById('drinkPopup');
+const popupImg = document.getElementById('popupImg');
+const popupTitle = document.getElementById('popupTitle');
+const popupPrice = document.getElementById('popupPrice');
+const waLink = document.getElementById('waLink');
+const popupClose = document.querySelector('.popup .close');
+
+function openPopup(variant) {
+  popupImg.src = variant.img;
+  popupTitle.textContent = variant.name;
+  popupPrice.textContent = variant.price;
+
+  const descDiv = document.getElementById('drinkDesc');
+  descDiv.innerHTML = `<p style="font-size: 0.95rem; color: #333; margin-top: 10px; margin-bottom: 50px;">
+      ${variant.desc}
+    </p>`;
+
+  // Reset sugar
+  const sugarNormal = document.getElementById('normal-sugar');
+  if (sugarNormal) sugarNormal.checked = true;
+
+  // Update WhatsApp link but keep the <i> icon intact
+  function updateWaLink() {
+    const selectedSugar = document.querySelector('input[name="sugar"]:checked').value;
+    waLink.href = `https://wa.me/212652450553?text=${encodeURIComponent(variant.waText + " (" + selectedSugar + ")")}`;
+    const span = waLink.querySelector('span');
+    if (span) span.textContent = ' 💬 Order via WhatsApp 💚';
+
+  }
+
+  updateWaLink();
+  document.querySelectorAll('input[name="sugar"]').forEach(radio => {
+    radio.addEventListener('change', updateWaLink);
+  });
+
+  popup.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+
+popupClose.addEventListener('click', closePopup);
+popup.addEventListener('click', (e) => {
+  if (e.target === popup) closePopup();
+});
+
+function closePopup() {
+  popup.style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+
+/* ===== Slider Logic ===== */
+let slideIndex = 0;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+let autoSlide = setInterval(() => plusSlides(1), 6000);
+
+function showSlides(n) {
+  const slides = document.querySelectorAll(".slide");
+  if (n >= slides.length) slideIndex = 0;
+  if (n < 0) slideIndex = slides.length - 1;
+
+  slides.forEach(slide => slide.style.display = "none");
+  slides[slideIndex].style.display = "block";
+}
+

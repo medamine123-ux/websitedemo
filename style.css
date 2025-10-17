@@ -1,126 +1,327 @@
-/* ====== Root Variables & Themes ====== */
-:root {
-  /* Base website colors (Amine Coffee style) */
-  --bg: #f1e1d1;            /* Base cream background */
-  --brown: #4B2E2E;         /* Dark coffee for header, buttons */
-  --brown-dark: #7B4F4F;    /* Medium coffee for titles, sections */
-  --card-bg: #EDE0D4;       /* Card backgrounds */
-  --accent: #D4AF37;        /* Gold accent for buttons, highlights */
-  --text: #1A1A1A;          /* Main text */
-  --radius: 12px;
-  --font: "Poppins", system-ui, Arial, sans-serif;
-
-  /* Optional secondary colors */
-  --accent-teal: #2A7F7F;       /* Secondary accent (teal) */
-  --highlight-yellow: #F4D35E;  /* CTA or highlights */
-}
-
-/* ===== Global Reset ===== */
-* { box-sizing: border-box; }
-html, body { height: 100%; }
-body {
+/* ===== RESET & BASE ===== */
+* {
   margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font);
-  -webkit-font-smoothing: antialiased;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f9f9f9;
+  color: #333;
+  line-height: 1.5;
+  overflow-x: hidden;
 }
 
-/* ===== Header ===== */
+/* ===== HEADER ===== */
 .site-header {
-  background: var(--brown);
+  background: #222;
   color: #fff;
-  padding: 12px 16px;
+  padding: 1rem;
+  text-align: center;
+  border-top: 2px solid #b8860b;
 }
 .header-inner {
   display: flex;
   align-items: center;
-  gap: 10px;
-}
-.logo {
-  font-size: 26px;
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  background: rgba(255,255,255,0.06);
-  border-radius: 10px;
+  gap: 0.5rem;
 }
+
 .brand h1 {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 1;
+  font-size: 1.4rem;
 }
 .tagline {
-  margin: 2px 0 0;
-  font-size: 12px;
-  opacity: 0.95;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+.logo img {
+  width: 80px;          /* adjusts size */
+  height: auto;         /* keeps proportions */
+  border-radius: 50%;   /* optional: makes it round */
+  object-fit: contain;  /* ensures full logo visible */
 }
 
-/* ===== Sections ===== */
-.menu-section { padding: 14px; }
-.section-title {
-  margin: 0 0 10px;
-  color: var(--brown-dark);
-  font-size: 18px;
-  font-weight: 600;
+
+/* ===== SLIDER SECTION ===== */
+/* ===== SLIDER SECTION ===== */
+.slider {
+  position: relative;
+  width: 100%;
+  height: 60vh; /* dynamic height for any screen */
+  min-height: 250px; /* mobile safe */
+  max-height: 720px; /* matches your image ratio */
+  overflow: hidden;
+  background: #000;
+  margin: 0 auto;
+  border-bottom: 3px solid #b8860b;
 }
 
-/* ===== Grid ===== */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+/* Container for slides */
+.slides {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
-/* ===== Card ===== */
-.card {
-  background: var(--card-bg);
-  border-radius: var(--radius);
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+/* Each slide hidden by default */
+.slide {
+  display: none;
+  width: 100%;
+  height: 100%;
 }
-.card .thumb {
-  width: 72px;
-  height: 72px;
-  flex-shrink: 0;
-  border-radius: 10px;
-  object-fit: cover;
-  background: #eee;
-}
-.card .content { flex: 1; min-width: 0; }
-.card .title { margin: 0; font-size: 15px; font-weight: 600; }
-.card .desc { margin: 4px 0 0; font-size: 12px; color: #6b6057; }
-.card .price { margin-top: 6px; font-weight: 700; color: var(--text); font-size: 13px; }
 
-/* Button area */
-.card .actions { margin-left: 8px; display: flex; align-items: center; }
-.btn-order {
-  display: inline-block;
-  background: var(--brown);
+/* Images fill perfectly with no empty space */
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* fills area nicely */
+  object-position: center;
+}
+
+/* Adjust for very small mobile screens */
+@media (max-width: 600px) {
+  .slider {
+    height: auto;
+    min-height: 220px;
+  }
+
+  .slide img {
+    object-fit: contain;  /* show full image */
+    height: auto;
+    width: 100%;
+    background-color: #000; /* keeps black frame for elegance */
+  }
+}
+
+
+/* ===== ARROW BUTTONS ===== */
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.4);
   color: white;
-  padding: 8px 12px;
+  font-size: 1.4rem;    /* smaller size */
+  padding: 5px 9px;     /* smaller button */
+  cursor: pointer;
+  border-radius: 50%;
+  user-select: none;
+  transition: background 0.3s ease, transform 0.2s ease;
+  z-index: 5;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(54, 53, 50, 0.7);
+  
+}
+.prev:active, .next:active {
+  background-color: rgba(224, 179, 43, 0.5);
+  transform: scale(0.95);
+}
+
+.prev { left: 15px; }
+.next { right: 15px; }
+
+/* ===== FADE ANIMATION ===== */
+.fade {
+  animation: fadeEffect 1s ease-in-out;
+}
+
+@keyframes fadeEffect {
+  from { opacity: 0.4; }
+  to { opacity: 1; }
+}
+
+
+/* ===== MENU LAYOUT ===== */
+.menu-container {
+  display: flex;
+  flex-direction: row;
+  min-height: 80vh;
+  background: #f9f9f9;
+  /* removed overflow:hidden; so sticky works */
+}
+
+/* ===== LEFT SIDEBAR (CATEGORIES) ===== */
+.categories {
+  width: 22%;
+  background: #f0f0f0;
+  padding: 1rem;
+  overflow-y: auto;
+  position: sticky;
+  top: 0;
+  height: 100vh; /* ensures it stays full height */
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* ===== LEFT SIDEBAR (CATEGORIES) ===== */
+.categories {
+  width: 22%;
+  background: #f0f0f0;
+  padding: 1rem;
+  overflow-y: auto;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+}
+.category {
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.category:hover { background: #d4c899; }
+.category.active { background: #d5c671; font-weight: bold; }
+
+/* ===== RIGHT MENU (DRINKS) ===== */
+.menu-section {
+  flex: 1;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+/* ===== DRINK CARD ===== */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  text-align: center;
+}
+.card:hover { transform: scale(1.02); }
+.card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px 8px 0 0;
+}
+.card .content { padding: 0.5rem; }
+.card .content h3 {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+  color: #b8860b;
+}
+.card .content p {
+  font-size: 0.85rem;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+.card .btn-small {
+  display: inline-block;
+  padding: 0.3rem 0.5rem;
+  background: #25D366;
+  color: #fff;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+/* ===== POPUP ===== */
+.popup {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(5px);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ===== POPUP CARD ===== */
+.popup-content {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+  width: 90%;
+  max-width: 340px;
+  padding: 1rem;
+  position: relative;
+  text-align: center;
+  animation: popUp 0.25s ease;
+}
+@keyframes popUp {
+  from { transform: translateY(30px) scale(0.95); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+.popup-content img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+.popup-content h3 {
+  font-size: 1.3rem;
+  color: #b8860b;
+  margin-bottom: 0.4rem;
+}
+.popup-content p {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 0.8rem;
+}
+.popup-content .close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 1.5rem;
+  color: #555;
+  cursor: pointer;
+}
+/**/
+/* ===== FIX WHATSAPP ICON ===== */
+.btn-order {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #25D366;
+  color: white;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
   border-radius: 8px;
   text-decoration: none;
-  font-size: 13px;
-}
-.btn-order:hover { background: var(--accent); }
-
-/* ===== Responsive adjustments ===== */
-@media (max-width: 500px) {
-  .grid { grid-template-columns: 1fr; gap: 10px; }
-  .card { flex-direction: row; padding: 8px; }
-  .card .thumb { width: 60px; height: 60px; }
-  .card .title { font-size: 14px; }
-  .btn-order { padding: 7px 10px; font-size: 12px; border-radius: 7px; }
+  font-size: 0.95rem;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
-@media (max-width: 380px) {
-  .card { flex-direction: column; align-items: flex-start; }
-  .card .actions { margin-left: 0; margin-top: 8px; }
+.btn-order:hover {
+  background: #1ebc57;
+  transform: scale(1.03);
 }
+
+.btn-order i {
+  font-size: 1.2rem;      /* make sure the icon is visible */
+  color: white;           /* ensure proper color */
+  display: inline-block;  /* prevent collapse */
+}
+
+
+
+
+
+
+
+
+
+
+
+
